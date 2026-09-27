@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BACKSTAGE" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <title>BACKSTAGE — NEXTworks</title>
+  <style>
+    :root{
+      --bg:#050505;--panel:#0d0d0f;--panel2:#131316;--text:#fff;--muted:#9b9ba3;
+      --line:rgba(255,255,255,.09);--glass:rgba(18,18,21,.72);--green:#a6ff00;
+      --radius:28px;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;background:#000;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;overscroll-behavior:none}
+    body{min-height:100dvh;background:radial-gradient(1000px 650px at 50% -10%,#26262b 0%,#080809 42%,#000 100%);overflow-x:hidden}
+    button,input{font:inherit}
+    button{border:0;color:inherit;background:none}
+    .app{max-width:520px;min-height:100dvh;margin:0 auto;position:relative;background:linear-gradient(180deg,rgba(255,255,255,.018),transparent 22%)}
+    .top{position:sticky;top:0;z-index:30;padding:calc(var(--safe-top) + 10px) 18px 10px;background:linear-gradient(180deg,rgba(0,0,0,.96) 0%,rgba(0,0,0,.76) 68%,rgba(0,0,0,0) 100%);backdrop-filter:blur(18px)}
+    .topRow{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:900;letter-spacing:-1.1px;font-size:25px}.brand span{font-size:10px;vertical-align:top;margin-left:6px;color:#8f8f96;letter-spacing:.3px}
+    .iconBtn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.075);display:grid;place-items:center;border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(20px)}
+    .page{display:none;padding:0 16px calc(108px + var(--safe-bottom))}.page.active{display:block;animation:fade .22s ease}@keyframes fade{from{opacity:.45;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .hero{padding-top:14px}.eyebrow{font-size:12px;color:#8c8c93;font-weight:700;letter-spacing:.11em;text-transform:uppercase}.hero h1{font-size:38px;line-height:.98;margin:8px 0 14px;letter-spacing:-1.9px}.hero p{color:#aaaab2;font-size:15px;line-height:1.45;margin:0 0 22px}
+    .storyRow{display:flex;gap:13px;overflow:auto;padding:2px 0 19px;scrollbar-width:none}.storyRow::-webkit-scrollbar{display:none}.story{min-width:72px;text-align:center}.storyRing{width:66px;height:66px;border-radius:50%;padding:2px;background:conic-gradient(from 20deg,#a6ff00,#53ffae,#fff,#a6ff00);margin:auto}.storyInner{width:100%;height:100%;border-radius:50%;background:#141416;border:3px solid #050505;display:grid;place-items:center;font-weight:900;font-size:17px}.storyName{font-size:11px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#d8d8dc}.verified{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:#87ff00;color:#020302;font-size:10px;font-weight:1000;vertical-align:1px}
+    .sectionHead{display:flex;align-items:end;justify-content:space-between;margin:9px 1px 12px}.sectionHead h2{font-size:21px;margin:0;letter-spacing:-.6px}.sectionHead button{font-size:13px;color:#a6ff00;font-weight:700}
+    .feature{position:relative;overflow:hidden;border-radius:31px;min-height:330px;padding:22px;border:1px solid rgba(255,255,255,.09);background:radial-gradient(700px 300px at 80% 0%,rgba(166,255,0,.22),transparent 55%),linear-gradient(155deg,#171719,#09090a 70%);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+    .feature:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-55px;bottom:-80px;background:radial-gradient(circle,#a6ff00 0%,rgba(166,255,0,.16) 35%,transparent 70%);filter:blur(4px)}
+    .pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.1);backdrop-filter:blur(16px);font-size:11px;font-weight:800;border:1px solid rgba(255,255,255,.1)}
+    .liveDot{width:7px;height:7px;border-radius:50%;background:#ff3b30;box-shadow:0 0 10px #ff3b30}.feature h3{font-size:34px;line-height:1;margin:68px 0 7px;letter-spacing:-1.4px;max-width:300px}.feature p{margin:0;color:#b6b6be;font-size:14px;max-width:250px}.featureBottom{position:absolute;left:22px;right:22px;bottom:20px;display:flex;justify-content:space-between;align-items:center;z-index:2}.cta{padding:12px 17px;border-radius:999px;background:#fff;color:#050505;font-weight:850;font-size:13px}.soft{padding:12px 14px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);font-weight:750;font-size:13px}
+    .cards{display:grid;gap:11px}.card{background:linear-gradient(180deg,#121214,#0d0d0f);border:1px solid var(--line);border-radius:25px;padding:16px}.dropTop{display:flex;justify-content:space-between;gap:12px}.dropTitle{font-size:20px;font-weight:850;letter-spacing:-.5px}.muted{color:#92929a}.small{font-size:12px}.tag{padding:6px 9px;border-radius:99px;background:#202024;color:#c5c5ca;font-size:10px;font-weight:800;height:max-content}.green{color:#a6ff00}.progress{height:5px;border-radius:99px;background:#242428;overflow:hidden;margin:14px 0 8px}.progress>i{display:block;height:100%;background:#a6ff00;border-radius:inherit}.meta{display:flex;justify-content:space-between;font-size:11px;color:#8f8f96}
+    .navWrap{position:fixed;z-index:60;left:50%;transform:translateX(-50%);bottom:calc(10px + var(--safe-bottom));width:min(488px,calc(100% - 24px));padding:0 12px}.nav{height:70px;border-radius:26px;background:rgba(20,20,23,.78);border:1px solid rgba(255,255,255,.12);box-shadow:0 15px 50px rgba(0,0,0,.5);backdrop-filter:blur(28px) saturate(150%);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:6px}.nav button{height:56px;border-radius:18px;color:#77777f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9px;font-weight:750}.nav button.active{color:#fff;background:rgba(255,255,255,.08)}.nav svg{width:22px;height:22px}.create{background:#fff!important;color:#000!important;width:46px!important;height:46px!important;border-radius:50%!important;margin:auto}
+    .search{display:flex;gap:10px;align-items:center;background:#141416;border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:10px 0 16px}.search input{flex:1;background:transparent;border:0;outline:0;color:#fff;font-size:15px}.chips{display:flex;gap:8px;overflow:auto;padding-bottom:14px;scrollbar-width:none}.chip{white-space:nowrap;padding:9px 13px;border-radius:999px;background:#151517;border:1px solid var(--line);font-size:12px;color:#b8b8bf}.chip.active{background:#fff;color:#000;font-weight:800}
+    .artistGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.artistCard{aspect-ratio:.84;border-radius:25px;padding:14px;position:relative;overflow:hidden;border:1px solid var(--line);background:radial-gradient(220px 180px at 50% 0%,var(--accent,rgba(166,255,0,.3)),transparent 65%),#101012}.artistAvatar{position:absolute;width:92px;height:92px;border-radius:50%;left:50%;top:43%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#323238,#111);display:grid;place-items:center;font-size:28px;font-weight:900;border:1px solid rgba(255,255,255,.12);box-shadow:0 12px 35px rgba(0,0,0,.45)}.artistInfo{position:absolute;left:14px;right:14px;bottom:13px}.artistInfo b{font-size:16px}.artistInfo div{font-size:10px;color:#8d8d95;margin-top:4px}
+    .pass{margin-top:15px;min-height:250px;border-radius:30px;padding:22px;position:relative;overflow:hidden;background:linear-gradient(140deg,#2b2b30,#0c0c0e 60%);border:1px solid rgba(255,255,255,.16);box-shadow:0 25px 60px rgba(0,0,0,.4)}.pass:before{content:"";position:absolute;inset:-40%;background:linear-gradient(120deg,transparent 42%,rgba(255,255,255,.1) 48%,transparent 54%);transform:rotate(10deg)}.passBrand{font-size:12px;font-weight:900;letter-spacing:.15em}.passName{font-size:27px;font-weight:900;letter-spacing:-1px;margin-top:65px}.passTier{margin-top:4px;color:#a6ff00;font-size:13px;font-weight:800}.passNo{position:absolute;bottom:20px;left:22px;color:#85858d;font-size:11px;letter-spacing:.12em}.passMark{position:absolute;right:20px;bottom:18px;font-weight:950;font-size:18px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.stat{padding:14px 8px;text-align:center;border-radius:19px;background:#111113;border:1px solid var(--line)}.stat b{display:block;font-size:19px}.stat span{font-size:10px;color:#8d8d96}
+    .profileHead{text-align:center;padding:24px 0 18px}.profilePhoto{width:92px;height:92px;border-radius:50%;background:linear-gradient(145deg,#2e2e34,#101012);margin:auto;display:grid;place-items:center;font-size:30px;font-weight:900;border:1px solid rgba(255,255,255,.12)}.profileHead h2{margin:10px 0 2px;font-size:25px}.profileHead p{margin:0;color:#8f8f97;font-size:13px}.setting{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line)}.setting:last-child{border-bottom:0}.setting b{font-size:14px}.setting span{font-size:12px;color:#777781}.badgeNW{display:inline-block;padding:5px 8px;border-radius:999px;background:#fff;color:#000;font-size:9px;font-weight:900;margin-top:8px}
+    .modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.62);backdrop-filter:blur(16px);display:none;align-items:flex-end;justify-content:center}.modal.open{display:flex}.sheet{width:min(520px,100%);max-height:88dvh;overflow:auto;border-radius:34px 34px 0 0;background:#101012;border:1px solid rgba(255,255,255,.12);padding:10px 18px calc(22px + var(--safe-bottom));animation:up .3s cubic-bezier(.2,.8,.2,1)}@keyframes up{from{transform:translateY(30px);opacity:.4}to{transform:none;opacity:1}}.grab{width:42px;height:5px;border-radius:99px;background:#39393f;margin:3px auto 15px}.sheetHero{height:190px;border-radius:25px;background:radial-gradient(380px 180px at 60% 0%,rgba(166,255,0,.28),transparent 60%),#171719;display:grid;place-items:center;font-size:52px;font-weight:900}.sheet h2{font-size:28px;letter-spacing:-1px;margin:18px 0 6px}.sheet p{color:#9d9da5;line-height:1.5;font-size:14px}.fullBtn{width:100%;padding:15px;border-radius:17px;background:#fff;color:#000;font-weight:900;margin-top:12px}.outlineBtn{width:100%;padding:15px;border-radius:17px;background:#18181b;border:1px solid var(--line);font-weight:800;margin-top:8px}.closeX{position:absolute;right:20px;margin-top:-48px;width:36px;height:36px;border-radius:50%;background:#27272b}
+    .toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(95px + var(--safe-bottom));z-index:150;background:#f4f4f5;color:#09090a;padding:11px 15px;border-radius:999px;font-size:12px;font-weight:800;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    @media(min-width:700px){body{padding:20px}.app{min-height:calc(100dvh - 40px);border-radius:34px;overflow:hidden;border:1px solid rgba(255,255,255,.09);box-shadow:0 35px 100px rgba(0,0,0,.55)}.navWrap{bottom:26px}.top{padding-top:16px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="topRow"><div class="brand">BACKSTAGE <span>by NEXTworks</span></div><button class="iconBtn" onclick="openProfile()" aria-label="Profile">NW</button></div></header>
+
+  <main id="home" class="page active">
+    <section class="hero"><div class="eyebrow">Sunday · Live now</div><h1>Closer than ever.</h1><p>Exclusive drops, live listening rooms and moments from the artists you actually care about.</p></section>
+    <div class="storyRow" id="stories"></div>
+    <div class="sectionHead"><h2>Happening now</h2><button onclick="go('discover')">Explore</button></div>
+    <article class="feature">
+      <span class="pill"><i class="liveDot"></i> LIVE LISTENING ROOM</span>
+      <h3>Nik Tendo — private session</h3><p>2,418 fans listening together. Join before the next track starts.</p>
+      <div class="featureBottom"><button class="cta" onclick="openRoom()">Join room</button><button class="soft" onclick="toast('Saved to your activity')">♡ Save</button></div>
+    </article>
+    <div class="sectionHead" style="margin-top:24px"><h2>Latest drops</h2><button onclick="go('discover')">See all</button></div>
+    <div class="cards">
+      <article class="card" onclick="openDrop('YZO DROP 06','Unreleased track + visual','Core Fans get first access tonight at 21:00. This drop stays unlocked for 24 hours.','YZO')"><div class="dropTop"><div><div class="dropTitle">YZO DROP 06</div><div class="muted small">Unreleased track + visual</div></div><span class="tag">TONIGHT</span></div><div class="progress"><i style="width:74%"></i></div><div class="meta"><span>Core Fans early access</span><span>21:00</span></div></article>
+      <article class="card" onclick="openDrop('NOBODYLISTEN / SECRET SET','Secret event · Prague','Location will unlock two hours before the event for confirmed ticket holders.','NL')"><div class="dropTop"><div><div class="dropTitle">SECRET SET — PRAGUE</div><div class="muted small">NobodyListen · 300 spots</div></div><span class="tag">EVENT</span></div><div class="progress"><i style="width:46%"></i></div><div class="meta"><span>138 / 300 claimed</span><span>FRI</span></div></article>
+    </div>
+  </main>
+
+  <main id="discover" class="page">
+    <section class="hero"><div class="eyebrow">Discover</div><h1>Find your next obsession.</h1></section>
+    <div class="search">⌕ <input id="searchInput" placeholder="Artists, drops, events" oninput="filterArtists(this.value)"/></div>
+    <div class="chips"><button class="chip active">For You</button><button class="chip">Hip-hop</button><button class="chip">Electronic</button><button class="chip">Trending</button><button class="chip">Nearby</button></div>
+    <div class="sectionHead"><h2>Verified artists</h2><button>All</button></div>
+    <div class="artistGrid" id="artistGrid"></div>
+    <div class="sectionHead" style="margin-top:24px"><h2>Upcoming</h2></div>
+    <div class="cards">
+      <article class="card"><div class="dropTop"><div><div class="dropTitle">BACKSTAGE SESSION 001</div><div class="muted small">Prague · secret venue</div></div><span class="tag green">CORE FAN</span></div><div class="meta" style="margin-top:16px"><span>Tickets unlock Oct 2</span><span>250 spots</span></div></article>
+    </div>
+  </main>
+
+  <main id="create" class="page">
+    <section class="hero"><div class="eyebrow">Artist Studio</div><h1>Create a drop.</h1><p>Artist-only tools for limited releases, tickets, listening rooms and announcements.</p></section>
+    <div class="cards"><button class="card" onclick="toast('Demo: New music drop created')"><div class="dropTitle">＋ Music Drop</div><div class="muted small" style="margin-top:4px">Preview, unreleased track, visual</div></button><button class="card" onclick="toast('Demo: Listening room scheduled')"><div class="dropTitle">◉ Listening Room</div><div class="muted small" style="margin-top:4px">Synchronized live listening</div></button><button class="card" onclick="toast('Demo: Event draft created')"><div class="dropTitle">⌖ Secret Event</div><div class="muted small" style="margin-top:4px">Tickets + timed location reveal</div></button></div>
+  </main>
+
+  <main id="pass" class="page">
+    <section class="hero"><div class="eyebrow">Your identity</div><h1>BACKSTAGE Pass.</h1><p>Your fan identity across artists, events and exclusive drops.</p></section>
+    <div class="pass"><div class="passBrand">BACKSTAGE PASS</div><div class="passName">Dominik</div><div class="passTier">CORE FAN · LEVEL 04</div><div class="passNo">NW · 2026 · 008431</div><div class="passMark">B/S</div></div>
+    <div class="stats"><div class="stat"><b>12</b><span>Artists</span></div><div class="stat"><b>8</b><span>Events</span></div><div class="stat"><b>21</b><span>Drops</span></div></div>
+    <div class="sectionHead" style="margin-top:24px"><h2>Memberships</h2></div>
+    <div class="cards"><div class="card"><div class="dropTop"><div><div class="dropTitle">Yzomandias</div><div class="muted small">Core Fan · since Sep 2026</div></div><span class="tag green">ACTIVE</span></div></div><div class="card"><div class="dropTop"><div><div class="dropTitle">Nik Tendo</div><div class="muted small">Follower</div></div><span class="tag">FREE</span></div></div></div>
+  </main>
+
+  <main id="profile" class="page">
+    <section class="profileHead"><div class="profilePhoto">D</div><h2>Dominik</h2><p>@dominik · BACKSTAGE ID</p><span class="badgeNW">NEXTworks ID CONNECTED</span></section>
+    <div class="card"><div class="setting"><div><b>Account</b><br><span>Profile, username, email</span></div><span>›</span></div><div class="setting"><div><b>NEXTworks ID</b><br><span>LINK connected</span></div><span class="green">Connected</span></div><div class="setting"><div><b>Notifications</b><br><span>Drops, events, live rooms</span></div><span>›</span></div><div class="setting"><div><b>Appearance</b><br><span>System · Dark</span></div><span>›</span></div><div class="setting"><div><b>About BACKSTAGE</b><br><span>Version 1.0.0 · NEXTworks</span></div><span>›</span></div></div>
+  </main>
+
+  <div class="navWrap"><nav class="nav">
+    <button data-page="home" class="active" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</button>
+    <button data-page="discover" onclick="go('discover')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Discover</button>
+    <button data-page="create" class="create" onclick="go('create')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></button>
+    <button data-page="pass" onclick="go('pass')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 9h6M7 13h4"/></svg>Pass</button>
+    <button data-page="profile" onclick="go('profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg>You</button>
+  </nav></div>
+</div>
+
+<div class="modal" id="modal" onclick="if(event.target===this) closeModal()"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const artists=[
+  {name:'Yzomandias',user:'@yzomandias',initial:'YZO',fans:'18.4K Core Fans',accent:'rgba(166,255,0,.42)'},
+  {name:'Nik Tendo',user:'@goldcigo',initial:'NT',fans:'14.1K Core Fans',accent:'rgba(255,55,65,.40)'},
+  {name:'🔇',user:'@nobodylisten',initial:'NL',fans:'9.8K Core Fans',accent:'rgba(124,88,255,.45)'},
+  {name:'NX Test Artist',user:'@nextworksartist',initial:'NX',fans:'2.1K Core Fans',accent:'rgba(0,190,255,.40)'}
+];
+const stories=document.getElementById('stories');
+const grid=document.getElementById('artistGrid');
+function renderStories(){stories.innerHTML=artists.map(a=>`<button class="story" onclick="openArtist('${a.user}')"><div class="storyRing"><div class="storyInner">${a.initial}</div></div><div class="storyName">${a.name}</div></button>`).join('')}
+function renderArtists(list=artists){grid.innerHTML=list.map(a=>`<button class="artistCard" style="--accent:${a.accent}" onclick="openArtist('${a.user}')"><div class="artistAvatar">${a.initial}</div><div class="artistInfo"><b>${a.name} <span class="verified">✓</span></b><div>${a.user} · ${a.fans}</div></div></button>`).join('')}
+function filterArtists(v){v=v.toLowerCase();renderArtists(artists.filter(a=>(a.name+' '+a.user).toLowerCase().includes(v)))}
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'})}
+function openProfile(){go('profile')}
+function openModal(html){document.getElementById('sheet').innerHTML='<div class="grab"></div>'+html;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}
+function openArtist(user){const a=artists.find(x=>x.user===user);openModal(`<button class="closeX" onclick="closeModal()">×</button><div class="sheetHero">${a.initial}</div><h2>${a.name} <span class="verified">✓</span></h2><div class="muted small">${a.user} · ${a.fans}</div><p>Official verified artist on BACKSTAGE. Follow for exclusive drops, live sessions and events.</p><button class="fullBtn" onclick="toast('Following ${a.name}');closeModal()">Follow artist</button><button class="outlineBtn" onclick="toast('Opening LINK integration demo')">Message on LINK</button><div class="sectionHead" style="margin-top:22px"><h2>Latest</h2></div><div class="card"><div class="dropTitle">Exclusive update</div><div class="muted small" style="margin-top:5px">Core Fans see this first.</div></div>`)}
+function openDrop(title,sub,desc,initial){openModal(`<button class="closeX" onclick="closeModal()">×</button><div class="sheetHero">${initial}</div><h2>${title}</h2><div class="muted small">${sub}</div><p>${desc}</p><button class="fullBtn" onclick="toast('Drop claimed');closeModal()">Claim drop</button><button class="outlineBtn" onclick="toast('Drop saved')">Save for later</button>`)}
+function openRoom(){openModal(`<button class="closeX" onclick="closeModal()">×</button><div class="sheetHero">NT</div><span class="pill" style="margin-top:18px"><i class="liveDot"></i> LIVE · 2,418</span><h2>Nik Tendo — Private Session</h2><p>Everyone hears the same track at the same time. Live reactions are shared with the room.</p><div style="display:flex;gap:8px;margin:16px 0"><button class="soft" onclick="toast('🔥 sent')">🔥</button><button class="soft" onclick="toast('🖤 sent')">🖤</button><button class="soft" onclick="toast('🤯 sent')">🤯</button><button class="soft" onclick="toast('😭 sent')">😭</button></div><button class="fullBtn" onclick="toast('You joined the listening room')">Join listening room</button>`)}
+let toastTimer;function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1800)}
+renderStories();renderArtists();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>
