@@ -1,0 +1,14 @@
+BACKSTAGE 2.0 — IMAGE / DATA NOTES
+Research snapshot: 27 Sep 2026
+
+ARTIST IMAGES
+Most artist images use current public Spotify artist profile images (spotifycdn / i.scdn.co).
+Exceptions use public promo imagery where a stable current Spotify URL was not surfaced.
+The app always renders initials behind the remote image, so a failed image never creates a blank placeholder.
+
+EVENT ARTWORK
+Real public event artwork is referenced remotely from official venue, promoter, Ticketportal/Ticketmaster or artist/label sources where found.
+Events without a verified poster intentionally use the artist profile image and are labelled ARTIST PHOTO.
+
+IMPORTANT
+Remote imagery requires an internet connection and may be changed or removed by the source site. BACKSTAGE 2.0 does not cache third-party artwork in the service worker.

@@ -1,0 +1,26 @@
+BACKSTAGE 2.0 — Major Update
+Research snapshot: 27 Sep 2026
+
+FIXED
+- Verified badges are rendered outside avatar clipping masks, including compact and hero avatars.
+- Broken/missing artist photos now fall back to styled initials instead of empty placeholders.
+- Remote images cross-fade only after successful load and gracefully disappear on error.
+- Follow and saved-show state now persists with localStorage.
+- Modal sheets can be dismissed by backdrop tap or Escape.
+- Improved iPhone safe-area behavior, focus states, reduced-motion support, and WebKit blur compatibility.
+- Service worker no longer caches third-party artist/poster images, reducing stale-image bugs.
+
+NEW VISUALS
+- Current public artist imagery for the 31-profile roster, primarily sourced from current Spotify artist profiles.
+- Real event artwork/posters where a verified public artwork source was available.
+- Events without verified poster artwork use the artist photo and are clearly labeled ARTIST PHOTO.
+- New image-source and verification explainer in-app.
+
+DESIGN / MOTION
+- Rebuilt ChatGPT for iOS × Apple-inspired visual system.
+- Spring bottom sheets, cross-fades, subtle image zoom, nav capsule motion, press feedback, and pass-card shine.
+- Uses View Transitions API where supported with graceful fallback.
+- Respects prefers-reduced-motion.
+
+DATA PRINCIPLE
+If BACKSTAGE presents a show as real, it must have a verifiable source. Missing data is shown as unavailable instead of invented.
