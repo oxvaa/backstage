@@ -24,3 +24,14 @@ DESIGN / MOTION
 
 DATA PRINCIPLE
 If BACKSTAGE presents a show as real, it must have a verifiable source. Missing data is shown as unavailable instead of invented.
+
+
+LINK AUTH / BACKEND
+- Connected directly to the existing LINK Production Supabase project.
+- Existing LINK email/password accounts can sign into BACKSTAGE.
+- Guest users see Login / Register in the You tab instead of a fake local identity.
+- Registration creates a real LINK Auth account with name + @username metadata.
+- Logged-in You page loads the live LINK profile: name, @username, avatar, account type, role and verified style.
+- Auth sessions persist securely through Supabase Auth; no service-role/admin secret is shipped in the client.
+- Navigation label changes from Login (guest) to You (authenticated).
+- Existing BACKSTAGE browsing remains available without login.

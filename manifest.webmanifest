@@ -1,7 +1,7 @@
 {
   "name": "BACKSTAGE 2.0",
   "short_name": "BACKSTAGE",
-  "description": "Verified artists and real shows by NEXTworks.",
+  "description": "Verified artists, real shows and LINK account sign-in by NEXTworks.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f5f5f3",
